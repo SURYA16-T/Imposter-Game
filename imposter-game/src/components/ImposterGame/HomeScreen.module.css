@@ -1,0 +1,384 @@
+/* ═══════════════════════════════════════════════════════════════════
+   HomeScreen.module.css — Premium Home Hub with Animated Characters
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Base Layout ──────────────────────────────────────────────── */
+.homeWrapper {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #0a0a0f;
+  position: relative;
+  overflow: hidden;
+  color: #e8e8f0;
+  font-family: 'Barlow', sans-serif;
+}
+
+.bgGrid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 60, 60, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 60, 60, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bgGlow {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 30, 30, 0.08) 0%, transparent 70%);
+  top: -200px;
+  right: -200px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bgGlow2 {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 208, 0.04) 0%, transparent 70%);
+  bottom: -200px;
+  left: -200px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.contentLayer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 40px 20px;
+}
+
+/* ─── Logo ─────────────────────────────────────────────────────── */
+.logo {
+  text-align: center;
+  margin-bottom: 12px;
+  animation: homeSlideDown 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.logo h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 14vw, 120px);
+  letter-spacing: 10px;
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 0 80px rgba(220, 30, 30, 0.4), 0 0 160px rgba(220, 30, 30, 0.1);
+  margin: 0;
+}
+
+.logo h1 span {
+  color: #dc1e1e;
+}
+
+.subtitle {
+  font-size: 14px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #555;
+  margin-top: 8px;
+  animation: homeTypewriter 0.8s ease-out 0.3s both;
+}
+
+/* ─── Character Parade ─────────────────────────────────────────── */
+.characterParade {
+  width: 100%;
+  max-width: 600px;
+  height: 100px;
+  position: relative;
+  margin: 20px 0 32px;
+  overflow: hidden;
+  animation: homeFadeIn 0.6s ease-out 0.5s both;
+}
+
+.paradeTrack {
+  display: flex;
+  gap: 24px;
+  position: absolute;
+  bottom: 0;
+  animation: paradeWalk 12s linear infinite;
+}
+
+/* ─── Welcome Card ─────────────────────────────────────────────── */
+.welcomeCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 28px 32px;
+  max-width: 440px;
+  width: 100%;
+  backdrop-filter: blur(16px);
+  animation: homeCardRise 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+  text-align: center;
+}
+
+.welcomeGreeting {
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #dc1e1e;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.welcomeName {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 4px;
+  color: #fff;
+  margin-bottom: 20px;
+  text-shadow: 0 0 30px rgba(220, 30, 30, 0.2);
+}
+
+/* ─── Stats Row ────────────────────────────────────────────────── */
+.statsRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.statCard {
+  flex: 1;
+  padding: 14px 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.statCard:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.statValue {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.statLabel {
+  font-size: 9px;
+  color: #555;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ─── Action Buttons ───────────────────────────────────────────── */
+.actionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.primaryBtn {
+  width: 100%;
+  background: linear-gradient(135deg, #dc1e1e, #ff4444);
+  border: none;
+  border-radius: 14px;
+  padding: 18px;
+  color: #fff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  letter-spacing: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.primaryBtn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 200% 100%;
+  animation: btnShimmer 3s infinite;
+}
+
+.primaryBtn:hover {
+  background: linear-gradient(135deg, #ff2828, #ff5555);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 40px rgba(220, 30, 30, 0.4);
+}
+
+.primaryBtn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.secondaryBtnRow {
+  display: flex;
+  gap: 10px;
+}
+
+.secondaryBtn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 14px;
+  color: #aaa;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 1px;
+}
+
+.secondaryBtn:hover {
+  background: rgba(220, 30, 30, 0.08);
+  border-color: rgba(220, 30, 30, 0.3);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.logoutBtn {
+  margin-top: 8px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 12px;
+  color: #555;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 1px;
+  width: 100%;
+}
+
+.logoutBtn:hover {
+  border-color: rgba(220, 30, 30, 0.3);
+  color: #dc1e1e;
+}
+
+/* ─── Version Badge ────────────────────────────────────────────── */
+.versionBadge {
+  margin-top: 20px;
+  font-size: 10px;
+  color: #333;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: homeFadeIn 0.5s ease-out 1s both;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes homeSlideDown {
+  from { opacity: 0; transform: translateY(-40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes homeTypewriter {
+  from { opacity: 0; letter-spacing: 20px; }
+  to { opacity: 1; letter-spacing: 5px; }
+}
+
+@keyframes homeFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes homeCardRise {
+  from { opacity: 0; transform: translateY(60px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes btnShimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes paradeWalk {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-120%); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .contentLayer {
+    padding: 30px 16px;
+    justify-content: flex-start;
+    padding-top: 15vh;
+  }
+
+  .logo h1 {
+    font-size: clamp(48px, 16vw, 80px);
+    letter-spacing: 6px;
+  }
+
+  .subtitle {
+    font-size: 11px;
+    letter-spacing: 3px;
+  }
+
+  .welcomeCard {
+    padding: 22px 18px;
+    border-radius: 18px;
+  }
+
+  .welcomeName {
+    font-size: 28px;
+  }
+
+  .statsRow {
+    gap: 8px;
+  }
+
+  .statValue {
+    font-size: 22px;
+  }
+
+  .statCard {
+    padding: 12px 8px;
+  }
+
+  .primaryBtn {
+    font-size: 20px;
+    padding: 16px;
+  }
+
+  .secondaryBtnRow {
+    flex-direction: column;
+  }
+
+  .characterParade {
+    height: 80px;
+    margin: 16px 0 24px;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo h1 {
+    font-size: 42px;
+    letter-spacing: 4px;
+  }
+
+  .welcomeName {
+    font-size: 24px;
+  }
+
+  .statValue {
+    font-size: 18px;
+  }
+}

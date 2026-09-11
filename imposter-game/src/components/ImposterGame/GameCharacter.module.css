@@ -1,0 +1,326 @@
+/* ═══════════════════════════════════════════════════════════════════
+   GameCharacter.module.css — Among Us-style Animated Characters
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Character Container ──────────────────────────────────────── */
+.character {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.character:hover {
+  transform: scale(1.08);
+}
+
+/* ─── Character Body (Among Us Style) ──────────────────────────── */
+.body {
+  position: relative;
+  width: var(--char-size, 60px);
+  height: calc(var(--char-size, 60px) * 1.3);
+  border-radius: calc(var(--char-size, 60px) * 0.45) calc(var(--char-size, 60px) * 0.45) calc(var(--char-size, 60px) * 0.2) calc(var(--char-size, 60px) * 0.2);
+  background: var(--char-color, #dc1e1e);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.4),
+    inset 0 -8px 16px rgba(0, 0, 0, 0.2),
+    inset 0 4px 8px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+/* ─── Visor ────────────────────────────────────────────────────── */
+.visor {
+  position: absolute;
+  top: 20%;
+  right: 5%;
+  width: 55%;
+  height: 35%;
+  border-radius: 50% 50% 50% 30%;
+  background: linear-gradient(135deg, #c8e6ff 0%, #88ccff 40%, #4da8da 100%);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5),
+    inset -2px -2px 6px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.visor::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 15%;
+  width: 30%;
+  height: 20%;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transform: rotate(-20deg);
+}
+
+/* ─── Backpack ─────────────────────────────────────────────────── */
+.backpack {
+  position: absolute;
+  left: -18%;
+  top: 30%;
+  width: 25%;
+  height: 40%;
+  border-radius: calc(var(--char-size, 60px) * 0.15) 0 0 calc(var(--char-size, 60px) * 0.15);
+  background: var(--char-color, #dc1e1e);
+  box-shadow:
+    -2px 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.2);
+  filter: brightness(0.85);
+}
+
+/* ─── Legs ─────────────────────────────────────────────────────── */
+.legs {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: -2px;
+}
+
+.leg {
+  width: calc(var(--char-size, 60px) * 0.28);
+  height: calc(var(--char-size, 60px) * 0.22);
+  border-radius: 0 0 calc(var(--char-size, 60px) * 0.12) calc(var(--char-size, 60px) * 0.12);
+  background: var(--char-color, #dc1e1e);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 -4px 6px rgba(0, 0, 0, 0.2);
+  filter: brightness(0.9);
+  transform-origin: top center;
+}
+
+/* ─── Name Label ───────────────────────────────────────────────── */
+.nameLabel {
+  text-align: center;
+  margin-top: 6px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(var(--char-size, 60px) * 1.5);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATION POSES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Idle Pose (subtle bounce) ────────────────────────────────── */
+@keyframes idleBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.idle .body {
+  animation: idleBounce 2s ease-in-out infinite;
+}
+
+/* ─── Walk Cycle ───────────────────────────────────────────────── */
+@keyframes walkCycle {
+  0% { transform: translateX(var(--walk-start, -100px)); }
+  100% { transform: translateX(var(--walk-end, 100px)); }
+}
+
+@keyframes legWalkLeft {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(25deg); }
+  75% { transform: rotate(-25deg); }
+}
+
+@keyframes legWalkRight {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-25deg); }
+  75% { transform: rotate(25deg); }
+}
+
+@keyframes walkBob {
+  0%, 50%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-3px); }
+  75% { transform: translateY(-3px); }
+}
+
+.walking {
+  animation: walkCycle var(--walk-duration, 6s) linear infinite;
+}
+
+.walking .body {
+  animation: walkBob 0.5s ease-in-out infinite;
+}
+
+.walking .leg:first-child {
+  animation: legWalkLeft 0.5s ease-in-out infinite;
+}
+
+.walking .leg:last-child {
+  animation: legWalkRight 0.5s ease-in-out infinite;
+}
+
+/* ─── Celebration Pose ─────────────────────────────────────────── */
+@keyframes celebrateJump {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  30% { transform: translateY(-20px) rotate(-5deg); }
+  60% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes celebrateLegs {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(20deg); }
+}
+
+.celebrating .body {
+  animation: celebrateJump 0.8s ease-in-out infinite;
+}
+
+.celebrating .leg:first-child {
+  animation: celebrateLegs 0.4s ease-in-out infinite;
+}
+
+.celebrating .leg:last-child {
+  animation: celebrateLegs 0.4s ease-in-out 0.2s infinite;
+}
+
+/* ─── Sneak Pose (Imposter) ────────────────────────────────────── */
+@keyframes sneakBob {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-2px) scaleY(0.95); }
+}
+
+@keyframes sneakLeg {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  50% { transform: rotate(10deg) translateX(2px); }
+}
+
+.sneaking .body {
+  animation: sneakBob 1.2s ease-in-out infinite;
+  transform: scaleX(-1);
+}
+
+.sneaking .leg:first-child {
+  animation: sneakLeg 0.8s ease-in-out infinite;
+}
+
+.sneaking .leg:last-child {
+  animation: sneakLeg 0.8s ease-in-out 0.4s infinite;
+}
+
+/* ─── Caught Pose (Ejected) ────────────────────────────────────── */
+@keyframes caughtSpin {
+  0% { transform: rotate(0deg) scale(1); opacity: 1; }
+  60% { transform: rotate(360deg) scale(0.8); opacity: 0.7; }
+  100% { transform: rotate(720deg) scale(0.3); opacity: 0; }
+}
+
+.caught {
+  animation: caughtSpin 2s ease-in forwards;
+}
+
+/* ─── Escaped Pose ─────────────────────────────────────────────── */
+@keyframes escapedRun {
+  0% { transform: translateX(0) scaleX(-1); }
+  100% { transform: translateX(200px) scaleX(-1); opacity: 0; }
+}
+
+.escaped {
+  animation: escapedRun 1.5s ease-in forwards;
+}
+
+/* ─── Ghost (Dead) ─────────────────────────────────────────────── */
+@keyframes ghostFloat {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(-12px); opacity: 0.8; }
+}
+
+.ghost .body {
+  animation: ghostFloat 2s ease-in-out infinite;
+  opacity: 0.5;
+  filter: brightness(0.6) saturate(0.3);
+}
+
+.ghost .legs {
+  display: none;
+}
+
+.ghostTail {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+}
+
+.ghostTailPiece {
+  width: calc(var(--char-size, 60px) * 0.18);
+  height: calc(var(--char-size, 60px) * 0.15);
+  background: var(--char-color, #dc1e1e);
+  border-radius: 0 0 50% 50%;
+  opacity: 0.4;
+  filter: brightness(0.6) saturate(0.3);
+}
+
+/* ─── Imposter Reveal Glow ─────────────────────────────────────── */
+@keyframes imposterRevealGlow {
+  0% { box-shadow: 0 0 0 rgba(220, 30, 30, 0); }
+  50% { box-shadow: 0 0 30px rgba(220, 30, 30, 0.6), 0 0 60px rgba(220, 30, 30, 0.3); }
+  100% { box-shadow: 0 0 15px rgba(220, 30, 30, 0.3); }
+}
+
+.imposterGlow .body {
+  animation: imposterRevealGlow 1.5s ease-in-out infinite alternate;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CHARACTER SIZE VARIANTS
+   ═══════════════════════════════════════════════════════════════ */
+
+.sizeSmall {
+  --char-size: 36px;
+}
+
+.sizeMedium {
+  --char-size: 60px;
+}
+
+.sizeLarge {
+  --char-size: 80px;
+}
+
+.sizeXLarge {
+  --char-size: 100px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CHARACTER COLOR PRESETS
+   ═══════════════════════════════════════════════════════════════ */
+.colorRed { --char-color: #dc1e1e; }
+.colorBlue { --char-color: #1e7bdc; }
+.colorGreen { --char-color: #1eb44e; }
+.colorPink { --char-color: #ed4b9e; }
+.colorOrange { --char-color: #e67e22; }
+.colorYellow { --char-color: #f1c40f; }
+.colorPurple { --char-color: #8e44ad; }
+.colorCyan { --char-color: #00d2d3; }
+.colorLime { --char-color: #a0d911; }
+.colorMaroon { --char-color: #7b2d26; }
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .sizeLarge {
+    --char-size: 60px;
+  }
+
+  .sizeXLarge {
+    --char-size: 72px;
+  }
+
+  .nameLabel {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+}
