@@ -194,7 +194,7 @@ Note that the project resides within the repository workspace. Navigate into the
 
 ```bash
 git clone https://github.com/SURYA16-T/Imposter-Game.git
-cd Imposter-Game/imposter-game
+cd Imposter-Game
 ```
 
 ### 2. Install Dependencies
