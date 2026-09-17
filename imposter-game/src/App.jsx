@@ -2,6 +2,7 @@ import AuthProvider from './components/Auth/AuthProvider';
 import { useAuth } from './components/Auth/useAuth';
 import LoginScreen from './components/Auth/LoginScreen';
 import ImposterGame from './components/ImposterGame/ImposterGame';
+import ErrorBoundary from './components/ErrorBoundary';
 
 function AppContent() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -29,9 +30,11 @@ function AppContent() {
 
 function App() {
   return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 

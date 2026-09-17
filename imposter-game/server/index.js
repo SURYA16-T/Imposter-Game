@@ -337,16 +337,25 @@ if (existsSync(DIST_PATH)) {
 async function start() {
   await initDb();
 
-  app.listen(PORT, () => {
-    console.log(`\n🎮 Imposter Game — Unified Server`);
-    console.log(`   Host Link:    ${SERVER_URL}`);
-    console.log(`   Google OAuth: ${hasRealGoogle ? "✅ Configured (Real OAuth)" : "⚡ Ready (Auto-Demo Fallback active)"}`);
-    console.log(`   GitHub OAuth: ${hasRealGithub ? "✅ Configured (Real OAuth)" : "⚡ Ready (Auto-Demo Fallback active)"}`);
-    console.log(`   Local Auth:   ✅ Password Registration & Login active\n`);
+  return new Promise((resolve) => {
+    const server = app.listen(PORT, () => {
+      console.log(`\n🎮 Imposter Game — Unified Server`);
+      console.log(`   Host Link:    ${SERVER_URL}`);
+      console.log(`   Google OAuth: ${hasRealGoogle ? "✅ Configured (Real OAuth)" : "⚡ Ready (Auto-Demo Fallback active)"}`);
+      console.log(`   GitHub OAuth: ${hasRealGithub ? "✅ Configured (Real OAuth)" : "⚡ Ready (Auto-Demo Fallback active)"}`);
+      console.log(`   Local Auth:   ✅ Password Registration & Login active\n`);
+      resolve(server);
+    });
   });
 }
 
-start().catch((err) => {
-  console.error("Failed to start server:", err);
-  process.exit(1);
-});
+// ─── Exports & Server Execution ──────────────────────────────────
+export { app, start };
+export default app;
+
+if (process.env.NODE_ENV !== "test") {
+  start().catch((err) => {
+    console.error("Failed to start server:", err);
+    process.exit(1);
+  });
+}

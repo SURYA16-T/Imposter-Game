@@ -483,8 +483,6 @@
   border-color: #dc1e1e;
 }
 
-.countBtn:active {}
-
 .countDisplay {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 48px;
@@ -709,7 +707,7 @@
 /* ─── Buttons ──────────────────────────────────────────────────── */
 .startBtn {
   width: 100%;
-  background: linear-gradient(135deg, #dc1e1e, #ff4444);
+  background: linear-gradient(135deg, #dc1e1e, rgba(64, 217, 22, 0.841));
   border: none;
   border-radius: 12px;
   padding: 18px;
@@ -737,7 +735,6 @@
   box-shadow: 0 8px 30px rgba(220, 30, 30, 0.4);
 }
 
-.startBtn:active:not(:disabled) {}
 
 .startBtn:disabled {
   background: #333;
@@ -901,7 +898,7 @@
   background: rgba(220, 30, 30, 0.25);
 }
 
-.readyBtn:active {}
+
 
 .readyBtnPulse {
   position: absolute;
@@ -965,10 +962,6 @@
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.flipped {
-  transform: rotateY(180deg);
-}
-
 .flipCardFront,
 .flipCardBack,
 .cardFace {
@@ -1002,7 +995,6 @@
 .cardBack {
   background: linear-gradient(135deg, #1a0a0a 0%, #0f0505 100%);
   border: 2px solid rgba(220, 30, 30, 0.4);
-  transform: rotateY(180deg);
 }
 
 .imposterBack,
@@ -1181,7 +1173,7 @@
 .gotItBtn:hover {  box-shadow: 0 8px 30px rgba(0, 255, 208, 0.3);
 }
 
-.gotItBtn:active {}
+
 
 .btnDisabled {
   opacity: 0.5;
@@ -2105,7 +2097,7 @@
   color: #fff;
 }
 
-.genreBtnInteractive:active {}
+
 
 .genreBtnRipple {
   animation: glowRipple 0.6s ease-out;
@@ -2366,7 +2358,8 @@
 }
 
 .playAgainSpiral:hover {
-  animation: spiralRefresh 0.8s ease !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(220, 30, 30, 0.4);
 }
 
 /* ─── Logout Button ────────────────────────────────────────────── */
@@ -3015,7 +3008,7 @@
   box-shadow: 0 4px 16px rgba(0, 255, 208, 0.2);
 }
 
-.homeBtn:active {}
+
 
 /* ═══════════════════════════════════════════════════════════════
    NEW: CHARACTER LINEUP (All Ready Phase)
@@ -3144,7 +3137,7 @@
   box-shadow: 0 4px 20px rgba(0, 255, 208, 0.15);
 }
 
-.homeReturnBtn:active {}
+
 
 /* ═══════════════════════════════════════════════════════════════
    STATIC HOME BUTTON (No animation, stays in place)

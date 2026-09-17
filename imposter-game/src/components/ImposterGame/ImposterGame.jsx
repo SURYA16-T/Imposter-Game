@@ -743,31 +743,33 @@ export default function ImposterGame() {
           <div className={`${s.cardRevealView} ${phaseAnimClass}`}>
             <div className={s.revealCardWrap}>
               <div
-                className={`${s.secretCard} ${cardFlipped ? s.flipped : ""} ${
+                className={`${s.secretCard} ${
                   cardFlipped ? (isImposter ? s.cardImposterBurst : s.cardCrewBurst) : ""
                 } ${s.cardElasticIn}`}
-                onClick={handleRevealCard}
               >
-                {/* Front (Hidden) */}
-                <div className={`${s.cardFace} ${s.cardFront}`}>
-                  <div className={s.cardFrontIcon}>🕵️</div>
-                  <div className={s.cardFrontName}>{currentPlayerName}</div>
-                  <div className={s.cardFrontInstruction}>
-                    TAP TO REVEAL YOUR ROLE
+                {!cardFlipped ? (
+                  <div className={`${s.cardFace} ${s.cardFront}`}>
+                    <div className={s.cardFrontIcon}>🕵️</div>
+                    <div className={s.cardFrontName}>{currentPlayerName}</div>
+                    <button 
+                      className={s.actionBtn} 
+                      onClick={handleRevealCard}
+                      style={{ marginTop: '20px', marginBottom: '15px' }}
+                    >
+                      REVEAL ROLE
+                    </button>
+                    <div className={s.cardFrontWarning}>
+                      Keep the screen hidden from others
+                    </div>
                   </div>
-                  <div className={s.cardFrontWarning}>
-                    Keep the screen hidden from others
-                  </div>
-                </div>
-
-                {/* Back (Revealed) */}
-                <div
-                  className={`${s.cardFace} ${s.cardBack} ${
-                    isImposter ? s.imposterCard : s.normalCard
-                  }`}
-                  style={{ visibility: transitioning ? "hidden" : "visible" }}
-                >
-                  <div className={s.revealContent}>
+                ) : (
+                  <div
+                    className={`${s.cardFace} ${s.cardBack} ${
+                      isImposter ? s.imposterCard : s.normalCard
+                    }`}
+                    style={{ visibility: transitioning ? "hidden" : "visible" }}
+                  >
+                    <div className={s.revealContent}>
                     <div className={s.revealIcon}>
                       {isImposter ? "😈" : "🤫"}
                     </div>
@@ -809,6 +811,7 @@ export default function ImposterGame() {
                     )}
                   </div>
                 </div>
+                )}
               </div>
             </div>
 
@@ -1095,7 +1098,7 @@ export default function ImposterGame() {
 
             {/* ─── 3-Button Result Actions ──────────────── */}
             <div className={s.resultActions}>
-              <button className={`${s.actionBtn} ${s.playAgainSpiral}`} onClick={quickRestart}>
+              <button className={s.actionBtn} onClick={quickRestart}>
                 ⚡ Next Round — Same Players
               </button>
               <button className={s.resetBtn} onClick={fullReset}>
